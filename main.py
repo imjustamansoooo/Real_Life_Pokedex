@@ -2,7 +2,7 @@ import pandas as pd
 file = "Pokédex_Info.xlsx"
 pokedex = pd.read_excel(file)
 
-print("Ready to use Pokédex")
+print("Welcome to the Pokédex!")
 user = float(input(":_ "))
 
 
@@ -10,7 +10,6 @@ found_pokemon = pokedex[pokedex["National\nDex"] == user]
 pokemon = found_pokemon.to_dict()
 
 print(pokemon)
-
 
 # print(pokedex["National\nDex"][user_input])
 # print(pokedex["Pokemon\nName"][user_input])
