@@ -2,7 +2,7 @@ import pandas as pd
 df = pd.read_excel(r"Pokédex_Info.xlsx")
 Pokedex = df.to_dict()
 
-print("Ready to use Pokédex!")
+print("Ready to use Pokédex")
 User_input = int(input(":_ "))
 print(Pokedex["National\nDex"][User_input])
 print(Pokedex["Pokemon\nName"][User_input])
