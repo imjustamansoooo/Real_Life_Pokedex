@@ -9,7 +9,10 @@ user = float(input(":_ "))
 found_pokemon = pokedex[pokedex["National\nDex"] == user]
 pokemon = found_pokemon.to_dict()
 
-print(pokemon)
+for i in pokemon:
+    u = str(i.replace("\n", " "))
+    print(f"{u}")
+    print(f"{pokemon[i]}\n")
 
 # print(pokedex["National\nDex"][user_input])
 # print(pokedex["Pokemon\nName"][user_input])
