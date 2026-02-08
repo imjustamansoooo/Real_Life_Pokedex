@@ -1,18 +1,92 @@
 import pandas as pd
-file = "Pokédex_Info.xlsx"
-pokedex = pd.read_excel(file)
+import pygame
+import tensorflow as tf
+from pathlib import Path
 
-print("Welcome to the Pokédex!")
-user = float(input(":_ "))
+# file = "Pokédex_Info.xlsx"
+# pokedex = pd.read_excel(file)
+#
+# print("Welcome to the Pokédex!")
+# user = float(input(":_ "))
+#
+# found_pokemon = pokedex[pokedex["National Dex"] == user]
+# pokemon = found_pokemon.to_dict()
+#
+# for i in pokemon:
+#     print(f"{i}:")
+#     value = next(iter(pokemon[i].values()))
+#     print(f"{value}\n")
 
 
-found_pokemon = pokedex[pokedex["National\nDex"] == user]
-pokemon = found_pokemon.to_dict()
+Dataset_Dir = Path(__file__).parent / "pokemon-dataset-1000/dataset"
 
-for i in pokemon:
-    u = str(i.replace("\n", " "))
-    print(f"{u}")
-    print(f"{pokemon[i]}\n")
+img_size = (224, 224)
+batch_size = 32
+
+train_ds = tf.keras.utils.image_dataset_from_directory(
+    Dataset_Dir,
+    validation_split=0.2,
+    subset="training",
+    seed=123,
+    image_size=img_size,
+    batch_size=batch_size
+)
+
+val_ds = tf.keras.utils.image_dataset_from_directory(
+    Dataset_Dir,
+    validation_split=0.2,
+    subset="validation",
+    seed=123,
+    image_size=img_size,
+    batch_size=batch_size
+)
+
+
+data_augmentation = tf.keras.Sequential([
+    tf.keras.layers.RandomFlip("horizontal"),
+    tf.keras.layers.RandomRotation(0.1),
+    tf.keras.layers.RandomZoom(0.1),
+    tf.keras.layers.RandomContrast(0.1),
+])
+
+base_model = tf.keras.applications.MobileNetV2(
+    input_shape=(224, 224, 3),
+    include_top=False,
+    weights="imagenet"
+)
+
+base_model.trainable = False
+
+model = tf.keras.Sequential([
+    data_augmentation,
+    base_model,
+    tf.keras.layers.GlobalAveragePooling2D(),
+    tf.keras.layers.Dense(len(train_ds.class_names), activation="softmax")
+])
+
+model.compile(
+    optimizer="adam",
+    loss="sparse_categorical_crossentropy",
+    metrics=["accuracy"]
+)
+
+model.fit(
+    train_ds,
+    validation_data=val_ds,
+    epochs=10
+)
+
+
+
+
+
+
+
+
+
+
+
+
 
 # print(pokedex["National\nDex"][user_input])
 # print(pokedex["Pokemon\nName"][user_input])
