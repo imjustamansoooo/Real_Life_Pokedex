@@ -15,7 +15,7 @@ MODEL_PATH = MODEL_DIR / "pokemon_model.keras"
 CLASS_NAMES_PATH = MODEL_DIR / "class_names.json"
 
 #IMAGE_PATH = Path("pokemon-dataset-1000/test/snorlax_12.png")
-IMAGE_PATH = Path("test-images/967985ca22b2b00b485eca2bd47295d2.png")   # <-- change if needed
+IMAGE_PATH = Path("test-images/be387d245247d8e1e805342c21b93ba7.jpg")   # <-- change if needed
 IMG_SIZE = (224, 224)
 
 # =====================
@@ -81,7 +81,7 @@ for i in pokemon:
     print(f"{value}\n")
 
 print("==========================")
-#
+
 # # =====================
 # # CONFIG
 # # =====================
