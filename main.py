@@ -87,7 +87,7 @@ def capture():
         print("\n===== POKEDEX RESULT =====")
         print(f"Pokémon:   {class_names[class_id]}")
         print(f"Confidence: {confidence_final}%")
-        pokemonName = str(class_names[class_id])
+        pokemonName = str(class_names[class_id]).capitalize()
 
     print("==========================\n")
 
@@ -103,7 +103,7 @@ def capture():
 
     os.rename(f"captures/{photoId}.jpg", f"captures/pokemonCaptures/{pokemonName}/[{pokemonName}]_({photoId}).jpg")
 
-    found_pokemon = pokedex[pokedex["Pokemon Name"] == pokemonName.capitalize()]
+    found_pokemon = pokedex[pokedex["Pokemon Name"] == pokemonName]
     pokemon = found_pokemon.to_dict()
 
     for i in pokemon:
@@ -156,7 +156,6 @@ while ConsoleLoop:
         quit()
     else:
         central_control(console)
-
 
 
 # print(pokedex["National\nDex"][user_input])
