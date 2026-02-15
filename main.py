@@ -43,17 +43,17 @@ print("Loaded Excel Pokédex Data")
 
 def photo(name):
     time.sleep(1)
-    photoId = random.randint(1, 100000)
+
     photoName = f"[{name}]_({photoId})"
-    os.system(f"fswebcam -r 1280x720 --jpeg 85 -D 1 captures/{photoName}.jpg")
+
     return photoName
 
 
 def capture():
     Top5 = {}
-
-    photo_dir = photo("EMPTY")
-    IMAGE_PATH = Path(f"captures/{photo_dir}")  # <-- change if needed
+    photoId = random.randint(1, 100000)
+    os.system(f"fswebcam -r 1280x720 --jpeg 85 -D 1 captures/{photoId}.jpg")
+    IMAGE_PATH = Path(f"captures/{photoId}.jpg")  # <-- change if needed
     IMG_SIZE = (224, 224)
     # =====================
     # LOAD & PREPROCESS IMAGE
