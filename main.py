@@ -41,12 +41,7 @@ print("Loaded Excel Pokédex Data")
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-def photo(name):
-    time.sleep(1)
 
-    photoName = f"[{name}]_({photoId})"
-
-    return photoName
 
 
 def capture():
