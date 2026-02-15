@@ -5,6 +5,10 @@ from pathlib import Path
 import json
 import numpy as np
 from PIL import Image
+import time
+import random
+import subprocess
+import os
 
 ConsoleLoop = True
 top_confidence = float(0.90)
@@ -37,10 +41,19 @@ print("Loaded Excel Pokédex Data")
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+def photo(name):
+    time.sleep(1)
+    photoId = random.randint(1, 100000)
+    photoName = f"[{name}]_({photoId})"
+    os.system(f"fswebcam -r 1280x720 --jpeg 85 -D 1 captures/{photoName}.jpg")
+    return photoName
+
 
 def capture():
     Top5 = {}
-    IMAGE_PATH = Path("test-images/OIP-2.jpg")  # <-- change if needed
+
+    photo_dir = photo("EMPTY")
+    IMAGE_PATH = Path(f"captures/{photo_dir}")  # <-- change if needed
     IMG_SIZE = (224, 224)
     # =====================
     # LOAD & PREPROCESS IMAGE
