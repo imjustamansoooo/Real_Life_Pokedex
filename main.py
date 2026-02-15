@@ -7,7 +7,6 @@ import numpy as np
 from PIL import Image
 import time
 import random
-import subprocess
 import os
 
 ConsoleLoop = True
@@ -40,8 +39,6 @@ pokedex = pd.read_excel(file)
 print("Loaded Excel Pokédex Data")
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
 
 
 def capture():
@@ -86,7 +83,6 @@ def capture():
 
         pokemonName = str(input("_: ").lower().strip())
 
-
     else:
         print("\n===== POKEDEX RESULT =====")
         print(f"Pokémon:   {class_names[class_id]}")
@@ -97,6 +93,15 @@ def capture():
 
     print("==========================")
 
+    try:
+        os.mkdir(f"captures/pokemonCaptures/{pokemonName}")
+        print(f"Directory for {pokemonName} created\n")
+    except FileExistsError:
+        print(f"Directory for {pokemonName} found\n")
+    except Exception as e:
+        print(f"An error occurred: {e}\n")
+
+    os.rename(f"captures/{photoId}.jpg", f"captures/pokemonCaptures/[{pokemonName}]_({photoId}).jpg")
 
     found_pokemon = pokedex[pokedex["Pokemon Name"] == pokemonName.capitalize()]
     pokemon = found_pokemon.to_dict()
