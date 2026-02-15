@@ -101,7 +101,7 @@ def capture():
     except Exception as e:
         print(f"An error occurred: {e}\n")
 
-    os.rename(f"captures/{photoId}.jpg", f"captures/pokemonCaptures/[{pokemonName}]_({photoId}).jpg")
+    os.rename(f"captures/{photoId}.jpg", f"captures/pokemonCaptures/{pokemonName}/[{pokemonName}]_({photoId}).jpg")
 
     found_pokemon = pokedex[pokedex["Pokemon Name"] == pokemonName.capitalize()]
     pokemon = found_pokemon.to_dict()
