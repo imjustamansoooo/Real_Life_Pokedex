@@ -9,6 +9,11 @@ import time
 import random
 import os
 
+
+pygame.mixer.init()
+pygame.mixer.music.load("sounds/Pokemon Center.mp3")
+pygame.mixer.music.play(-1, 0, 0)
+
 ConsoleLoop = True
 top_confidence = float(0.90)
 
